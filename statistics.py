@@ -29,11 +29,10 @@ def median(values):
     :return: median of iterable
     """
     length = len(values)
-    sorted_vals = sorted(values)
-    result = sorted_vals[ceil(length / 2)]
     if (length % 2 == 0):
-        result = (result + sorted_vals[length / 2 + 1]) / 2
-    return result
+        return (values[int(length/2)-1]+values[int(length/2)])/2
+    else:
+        return values[ceil(length/2)-1]
 
 
 def population_statistics(feature_description, data, treatment, target, threshold, is_above,
