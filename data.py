@@ -5,7 +5,7 @@ def load_data(path, features):
     """
     returns filtered information from database in dictionary form
     :param path: path of the database file
-    :param features: wanted features for use
+    :param features: wanted features for analysis
     :return: dict with wanted features and corresponding values
     """
     df = pandas.read_csv(path)
