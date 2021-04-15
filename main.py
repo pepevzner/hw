@@ -7,7 +7,7 @@ def main(argv):
     features = argv[2].split(", ")
     print(features)
     info = data.load_data(argv[1], features)
-    print(statistics.mean(info["t1"]))
+    data.filter_by_feature(info,"season",{0,1})
 
 
 if __name__ == '__main__':
