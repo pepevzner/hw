@@ -29,6 +29,7 @@ def filter_by_feature(data, feature, values):
         data2[keys[i]] = unziped2[i]
     print(data1)
     print(data2)
+
     return data1, data2
 
 
