@@ -19,6 +19,8 @@ def mean(values):
     :param values: given iterable
     :return: mean average of iterable
     """
+    if (len(values)==0):
+        return 0
     return sum(values) / len(values)
 
 
@@ -29,13 +31,21 @@ def median(values):
     :return: median of iterable
     """
     length = len(values)
+    if(length==0):
+        return 0
+    ordered = sorted(values)
     if (length % 2 == 0):
-        return (values[int(length/2)-1]+values[int(length/2)])/2
+        return (ordered[int(length / 2) - 1] + ordered[int(length / 2)]) / 2
     else:
-        return values[ceil(length/2)-1]
+        return ordered[ceil(length / 2) - 1]
+
+
+def filter_population(data, treatment, target, threshold, is_above):
+    return [valid for valid, treat_val in zip(data[target], data[treatment]) if ((treat_val > threshold) == is_above)]
 
 
 def population_statistics(feature_description, data, treatment, target, threshold, is_above,
                           statistic_functions):
-    print(feature_description+":")
-
+    population_stat = filter_population(data, treatment, target, threshold, is_above)
+    print(f"{feature_description} \n{treatment}: "
+          f"{', '.join([str(func(population_stat)) for func in statistic_functions])}")

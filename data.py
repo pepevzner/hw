@@ -14,23 +14,19 @@ def load_data(path, features):
     return filtered
 
 
+def create_filtered_dict(keys, zipped, feature, values, flag=True):
+    feat_index = keys.index(feature)
+    lst = [group for group in zipped if flag == (group[feat_index] in values)]
+    unzipped = [list(t) for t in zip(*lst)]
+    data = {k: v for k, v in zip(keys, unzipped)}
+    return data
+
+
 def filter_by_feature(data, feature, values):
     zipped = list(zip(*data.values()))
     keys = list(data.keys())
-    feat_index = keys.index(feature)
-    list1 = [group for group in zipped if group[feat_index] in values]
-    list2 = [group for group in zipped if not (group[feat_index] in values)]
-    unziped1 = [list(t) for t in zip(*list1)]
-    data1 = {}
-    unziped2 = [list(t) for t in zip(*list2)]
-    data2 = {}
-    for i in range(len(keys)):
-        data1[keys[i]] = unziped1[i]
-        data2[keys[i]] = unziped2[i]
-    print(data1)
-    print(data2)
-
-    return data1, data2
+    return create_filtered_dict(keys, zipped, feature, values), \
+        create_filtered_dict(keys, zipped, feature,values, False)
 
 
 def print_details(data, features, statistic_functions):
