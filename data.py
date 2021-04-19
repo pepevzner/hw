@@ -26,7 +26,7 @@ def filter_by_feature(data, feature, values):
     zipped = list(zip(*data.values()))
     keys = list(data.keys())
     return create_filtered_dict(keys, zipped, feature, values), \
-        create_filtered_dict(keys, zipped, feature,values, False)
+        create_filtered_dict(keys, zipped, feature, values, False)
 
 
 def print_details(data, features, statistic_functions):
