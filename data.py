@@ -3,7 +3,7 @@ import pandas
 
 def load_data(path, features):
     """
-    returns filtered information from database in dictionary form
+    returns database in dictionary form with needed features {title:list of values from file}
     :param path: path of the database file
     :param features: wanted features for analysis
     :return: dict with wanted features and corresponding values
@@ -22,7 +22,7 @@ def create_filtered_dict(keys, zipped, feature, values, flag=True):
     :param feature: feature to filter by
     :param values: correct values
     :param flag: filter by correct values if true wrong values if false
-    :return:filtered dictionary according to vars
+    :return:filtered dictionary according to the variables
     """
     feat_index = keys.index(feature)
     lst = [group for group in zipped if flag == (group[feat_index] in values)]
@@ -51,7 +51,6 @@ def print_details(data, features, statistic_functions):
     :param data: dataset to print info about
     :param features: wanted features
     :param statistic_functions: functions for the dataset
-    :return: void
     """
     for category in features:
         print(category + ": " + ', '.join([str(func(data[category])) for func in statistic_functions]))

@@ -5,7 +5,6 @@ import statistics
 
 def main(argv):
     features = argv[2].split(", ")
-    print(features)
     info = data.load_data(argv[1], features)
 
     # question 1
@@ -34,6 +33,4 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    main([0, "C:\\Users\\daniel\\Desktop\\london_sample.csv", "hum, t1, cnt, season, is_holiday"])
-    # temporary for tests
-    # main(sys.argv)
+    main(sys.argv)
