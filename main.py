@@ -1,21 +1,36 @@
+import sys
 import data
 import statistics
-import districts
-import sys
 
 
 def main(argv):
+    features = argv[2].split(", ")
+    info = data.load_data(argv[1], features)
 
-    covid_data=data.Data(argv[1])
-    district_data=districts.Districts(covid_data)
-    district_data.filter_districts(["L","S"])
-
+    # question 1
     print("Question 1:")
-    actions=[statistics.mean,statistics.median]
-    features=["hospitalized_with_symptoms","intensive_care","total_hospitalized","home_insulation"]
-    district_data.print_details(features,actions)
+    features = ["hum", "t1", "cnt"]
+    actions = [statistics.sum, statistics.mean, statistics.median]
+    summer = data.filter_by_feature(info, "season", {1})[0]
+    holiday = data.filter_by_feature(info, "is_holiday", {1})[0]
+    print("Summer:")
+    data.print_details(summer, features, actions)
+    print("Holiday:")
+    data.print_details(holiday, features, actions)
+    print("All:")
+    data.print_details(info, features, actions)
+
+    # question 2
+    print("\nQuestion 2:")
+    T1 = 13.0
+    actions = [statistics.mean, statistics.median]
+    winter = data.filter_by_feature(info, "season", {3})[0]
+    winter_holiday, winter_weekday = data.filter_by_feature(winter, "is_holiday", {1})
+    for above in [False, True]:
+        print(f"If t1{'>' if above else '<='}13.0, then:")
+        statistics.population_statistics("Winter holiday records:", winter_holiday, "t1", "cnt", T1, above, actions)
+        statistics.population_statistics("Winter weekday records:", winter_weekday, "t1", "cnt", T1, above, actions)
 
 
 if __name__ == '__main__':
-    main([0,"C:\\Users\\daniel\\Desktop\\dpc-covid19-ita-regioni_sample.csv"])
-
+    main(sys.argv)

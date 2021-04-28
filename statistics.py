@@ -1,4 +1,4 @@
-import math
+from math import ceil
 
 
 def sum(values):
@@ -37,7 +37,7 @@ def median(values):
     if length % 2 == 0:
         return (ordered[int(length / 2) - 1] + ordered[int(length / 2)]) / 2
     else:
-        return ordered[math.ceil(length / 2) - 1]
+        return ordered[ceil(length / 2) - 1]
 
 
 def population_statistics(feature_description, data, treatment, target, threshold, is_above,
@@ -54,4 +54,3 @@ def population_statistics(feature_description, data, treatment, target, threshol
     """
     population = [v for v, treat_val in zip(data[target], data[treatment]) if ((treat_val > threshold) == is_above)]
     print(f"{feature_description} \n{treatment}: {', '.join([str(func(population)) for func in statistic_functions])}")
-
