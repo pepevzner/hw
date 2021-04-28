@@ -1,7 +1,16 @@
 import pandas
 
 
-def load_data(path, features):
+class Data:
+    def __init__(self,path):
+        self.data=load_data(path)
+    def get_all_districts(self):
+        return self.data["denominazione_region"]
+    def set_districts_data(self, districts):
+        self.data=filter_by_feature(self.data,"denominazione_region",districts)[0]
+
+
+def load_data(path, features=None):
     """
     returns database in dictionary form with needed features {title:list of values from file}
     :param path: path of the database file
@@ -10,8 +19,9 @@ def load_data(path, features):
     """
     df = pandas.read_csv(path)
     data = df.to_dict(orient="list")
-    filtered = {d: data[d] for d in features}
-    return filtered
+    if features!=None:
+        data={d:data[d] for d in features}
+    return data
 
 
 def create_filtered_dict(keys, zipped, feature, values, flag=True):
