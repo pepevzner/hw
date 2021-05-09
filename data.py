@@ -2,12 +2,14 @@ import pandas
 
 
 class Data:
-    def __init__(self,path):
-        self.data=load_data(path)
+    def __init__(self, path):
+        self.data = load_data(path)
+
     def get_all_districts(self):
         return self.data["denominazione_region"]
+
     def set_districts_data(self, districts):
-        self.data=filter_by_feature(self.data,"denominazione_region",districts)[0]
+        self.data = filter_by_feature(self.data, "denominazione_region", districts)[0]
 
 
 def load_data(path, features=None):
@@ -19,8 +21,8 @@ def load_data(path, features=None):
     """
     df = pandas.read_csv(path)
     data = df.to_dict(orient="list")
-    if features!=None:
-        data={d:data[d] for d in features}
+    if features is not None:
+        data = {d: data[d] for d in features}
     return data
 
 
