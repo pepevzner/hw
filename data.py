@@ -6,7 +6,7 @@ class Data:
         self.data = load_data(path)
 
     def get_all_districts(self):
-        return self.data["denominazione_region"]
+        return list(set(self.data["denominazione_region"]))
 
     def set_districts_data(self, districts):
         self.data = filter_by_feature(self.data, "denominazione_region", districts)[0]
