@@ -26,4 +26,4 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    main([0, "C:\\Users\\daniel\\Desktop\\dpc-covid19-ita-regioni.csv"])
+    main(sys.argv)
